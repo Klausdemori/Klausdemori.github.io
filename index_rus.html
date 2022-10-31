@@ -66,13 +66,59 @@ $('#contact-form').on('submit', function (e) {
 });
         </script>
 
+        <!-- write your code here --> <!--  fla script -->
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="AKVARIUM_HTML5_Canvas.js"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("4339B00A2DE98C4BA525D571B576143B");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib.AKVARIUM_HTML5Canvas();
+	stage = new lib.Stage(canvas);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>
+<!-- write your code here -->
+
         
     
         
       </head>
-<body>
+<body >
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="first_block">
     <div class="container justify-content-center">
         <!-- Navbar content -->
  
@@ -81,9 +127,10 @@ $('#contact-form').on('submit', function (e) {
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    
     <div class="collapse navbar-collapse " id="navbar1">
       <ul class="navbar-nav mr-auto mx-auto ">
-          <li class="nav-item h-100 ">
+          <li class="nav-item h-100  ">
               <a class="nav-link" href="index.html">ENG</a>
             </li>
             <li class="nav-item h-100">
@@ -95,6 +142,7 @@ $('#contact-form').on('submit', function (e) {
       </ul>
     
     </div>
+   
 
   </div>
 </nav>
@@ -103,94 +151,139 @@ $('#contact-form').on('submit', function (e) {
 
            
  <div class="jumbotron text-center">
-                <img src="img/logo.png" class="LOGO" width="25%">
+                <!--HEROE-->
+                <div class="container" >
+                  <div class="row" id="first_block">
+                    
+                    <div class="col fbr" ><div class="nameru" >ПАВЕЛ БРАГИН</div><br></be> ВЕБ, ДИЗАЙН, МАРКЕТИНГ</div>
+                    
+                  </div>
+                <!---->
+                  <div class="row">
+                 
+                    <div class="col-md-6 col-sm-12"> <div class="pic3"> <img src="img/santa_braga.png" class="img-fluid " alt="Responsive image" > </div>
+                    
+                  </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="con1  "> 
+                          
+                           
+                          
+                           
+                          
+                          
+                          <br>
+                          Владею 3 языками: Эстонским, Английским и Русским.
+                          <br>
+                          <br>
+                          Prototyping + Axure RP, Photoshop, Illustrator  , UI and UX. HTML, CSS, Javascript, SQL, Php, C# 
+                          <br>
+                          <br>
+                          30 лет, творческая личность, собираю пк, умею верстать, учу full-stack,
+                          всегда любил рисовать, писать и читать стихи, выступать, играл на скрипке,
+                          строил карты в heroes 3, oblivion, warcarft, изучал макретинг, дизайн и программирование, сейчас фокус на UI/UX, хочу изучать Unity и гейм дизан.
+                          <br>
+                        
+                       
+                          
+                        
+                          
+                        
+                          </div>
+                    </div>
+                  </div>
               
             </div>
+
+            <!--HEROE-->
+
+            <br>
     
             
            
-            <!---->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container justify-content-center">
-                    <!-- Navbar content -->
-             
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-            
-                <div class="collapse navbar-collapse " id="navbar1">
-                  <ul class="navbar-nav mr-auto mx-auto ">
-                      <li class="nav-item h-100 ">
-                          <a class="nav-link" href="#first_block">ИНФО</a>
-                        </li>
-                        <li class="nav-item h-100">
-                          <a class="nav-link" href="#second_block">ПРОЭКТЫ</a>
-                        </li>
-                        <li class="nav-item h-100">
-                          <a class="nav-link" href="#Third_block">ПОРТФОЛИО</a>
-                        </li>    
-                        <li class="nav-item h-100">
-                          <a class="nav-link" href="#4_block">КОНТАКТ</a>
-                        </li>
-                     
-                  </ul>
-                
-                </div>
-
-              </div>
-            </nav>
+           
             <!-- <div class="da" >DIGITAL AGENCY: MAKE YOUR SITE BETTER </div>-->
            
            
             <!---->
-            <br>
-            <div class="container">
-              <div class="row" id="first_block">
-                <div class="col"></div>
-                <div class="col fb" > Привет <strong>я Павел</strong>!<br></div>
-                <div class="col"></div>
-              </div>
-            <!---->
-              <div class="row">
+           
+          
+          
              
-                <div class="col-md-6 col-sm-12"> <div class="pic3"> <img src="img/santa_braga.png" class="img-fluid " alt="Responsive image" > </div>
-                
+            </div>
+            
+             <!---->
+
+              <!---->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <div class="container justify-content-center">
+                  <!-- Navbar content -->
+           
+              
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          
+              <div class="collapse navbar-collapse " id="navbar1">
+                <ul class="navbar-nav mr-auto mx-auto ">
+                    <li class="nav-item h-100 ">
+                        <a class="nav-link" href="#first_block">ИНФО</a>
+                      </li>
+                      <li class="nav-item h-100">
+                        <a class="nav-link" href="#second_block">ПРОЭКТЫ</a>
+                      </li>
+                      <li class="nav-item h-100">
+                        <a class="nav-link" href="#Third_block">ПОРТФОЛИО</a>
+                      </li>    
+                      <li class="nav-item h-100">
+                        <a class="nav-link" href="#4_block">КОНТАКТ</a>
+                      </li>
+                   
+                </ul>
+              
               </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="con1  "> 
-                      
-                       
-                      
-                       
-                        Я веб-разработчик и графический дизайнер.<br>
-                        Моя миссия — сделать лучший дизайн для каждой компании в мире.<br>
-                        Для меня важно, чтобы моя работа помогала бизнесу находить своих клиентов и доносить сообщение.
-                        И мы рады предоставить дизайн бренда, веб-дизайн, дизайн приложений и, если вы хотите, любую цифровую графику, макет веб-страниц или поисковую оптимизацию.
-                      <!--HTML, CSS, Javascript, SQL, C#, Php + Photoshop, Illustrator + Axure RP, Prototyping, UI and UX.  -->
-                      </div>
-                </div>
-              </div>
- <div class="container">
+
+            </div>
+          </nav>
+
+
+            <!---->
+           <!---->
+           <br>
+           <div class="container">
+             <div class="row" id="first_block">
+               <div class="col"></div>
+              
+               <div class="col"></div>
+             </div>
+             </div>
+           <!---->
+            <!---->
+
+             <div class="container">
+
+              
               <div class="row" id="first_block">
                
                   <div class="col-md-4 col-sm-12 PL">
                       <img src="img/portfolio/tabs/we.png"class="p1 img-fluid">
+                      <br>
+                      <a href="https://github.com/Klausdemori?tab=repositories">Git Repositiries</a>
                   </div>
                   <div class="col-md-4 col-sm-12" >
-                      <img src="img/portfolio/tabs/ui.png"class="p1 img-fluid"> 
+                      <img src="img/portfolio/tabs/ui.png"class="p1 img-fluid">   
+                      <br>
+                      <a href="https://dribbble.com/santa8braga">Dribbble Protfolio</a>
                   </div>
                   <div class="col-md-4 col-sm-12">
                       <img src="img/portfolio/tabs/br.png"class="p1 img-fluid"> 
+                      <br>
+                      <a href="https://www.behance.net/pavelbragin">Behance Protfolio</a>
                   </div>
 
 
                 </div>
           </div>
-             
-            </div>
-            
-             <!---->
    
                    <div class="bgsec" >
                           <!---->
@@ -198,30 +291,32 @@ $('#contact-form').on('submit', function (e) {
                       <div class="container">
                         <div class="row" id="second_block">
                           <div class="col"></div>
-                          <div class="col ot" >ПРОЭКТЫ</div>
+                          <div class="col fbr" >ПРОЭКТЫ</div>
                           <div class="col"></div>
                         </div>  
                         <div class="row" >
                            
                             <div class="col-4" >
-                              <img src="img/Santa_braga_2.png"class="picweb1 img-fluid we"> 
+                              <!--<img src="img/Santa_braga_2.png"class="picweb1 img-fluid we"> 
                               <div class="Name">Черепашка</div>
                               <div class="Name Des">Please donwload and play in windows system <a href="https://github.com/Klausdemori/tortule">Play</a></div>
-                              
+                              -->
                             </div>
 
                             <div class="col-4">
-                                 <img src="img/portfolio/placat/aon120319placat.jpg"class="picweb1 img-fluid we"> 
+                              <img src="img/Santa_braga_2.png"class="picweb1 img-fluid we"> 
+                              <div class="Name"> <a href="https://klausdemori.github.io/SITE_greed/">Играть в Игру</a></div>
+                              <div class="Name Des">За сколько ты успеешь убрать все обьекты ? </div>
+
+                            </div>
+
+                            <div class="col-4">
+                                <!-- <img src="img/portfolio/placat/aon120319placat.jpg"class="picweb1 img-fluid we"> 
                                 <div class="Name">Дизайн Сайта</div>
                                 <a href="https://www.figma.com/file/LP4g7H2MPlTc2QcG4GpfctUL/Untitled?node-id=0%3A1">Figma Link</a>
-
+                                -->
                             </div>
-                            <div class="col-4">
-                                <img src="img/Santa_braga_2.png"class="picweb1 img-fluid we"> 
-                                <div class="Name"> <a href="https://klausdemori.github.io/SITE_greed/">Играть в Игру</a></div>
-                                <div class="Name Des">За сколько ты успеешь убрать все обьекты ? </div>
-
-                            </div>
+                            
 
                              </div>
 
@@ -234,7 +329,7 @@ $('#contact-form').on('submit', function (e) {
                   <div class="container">
                       <div class="row" id="Third_block">
                         <div class="col"></div>
-                        <div class="col fb" >РАБОТЫ</div>
+                        <div class="col fbr" >ПОРТФОЛИО</div>
                         <div class="col"></div>
                       </div>
                         <div class="row h-100" id="Third_block">
@@ -440,7 +535,7 @@ $('#contact-form').on('submit', function (e) {
   
   </div>  
 
-                        <div class="row" id="Third_block">
+                        <!--<div class="row" id="Third_block">
                           
                           <div class="col"><h4></h4></div>
                           <div class="col"></div>
@@ -451,7 +546,7 @@ $('#contact-form').on('submit', function (e) {
                           <div class="col"></div>
                           <div class="col"></div>
                         </div>
-                        
+                        -->
                    
                   </div>
 
@@ -459,7 +554,7 @@ $('#contact-form').on('submit', function (e) {
 
 
                   <!---->
-                  <div class="bgsec" >
+                  <div class="bgthird" >
                       <!-- Contact form-->
                    <br>
                    
