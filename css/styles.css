@@ -1,3 +1,7 @@
+body{
+    color: white;
+}
+
 .container1{
     WIDTH: -webkit-fill-available;
 }
